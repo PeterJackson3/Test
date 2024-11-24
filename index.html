@@ -95,10 +95,16 @@
     </div>
 
     <script>
-        signupForm.addEventListener('submit', function(event) {
-            event.preventDefault();
+        const signupForm = document.getElementById('signupForm');
+        const gmailInput = document.getElementById('gmail');
+        const passwordInput = document.getElementById('password');
+        const gmailError = document.getElementById('gmailError');
+        const passwordError = document.getElementById('passwordError');
+        const gmailPattern = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
 
+        signupForm.addEventListener('submit', function(event) {
             let valid = true;
+
             if (!gmailPattern.test(gmailInput.value)) {
                 gmailError.style.display = 'block';
                 valid = false;
@@ -113,10 +119,8 @@
                 passwordError.style.display = 'none';
             }
 
-            if (valid) {
-                signupFormContainer.style.display = 'none';
-                quizContainer.style.display = 'block';
-                                  signupForm.submit();
+            if (!valid) {
+                event.preventDefault(); // Prevent form submission if validation fails
             }
         });
     </script>
